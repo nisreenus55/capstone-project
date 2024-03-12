@@ -9,7 +9,15 @@ from django.contrib.auth.models import User
 from rest_framework import viewsets, generics
 # Create your views here.
 from django.http import HttpResponse
+#in views.py
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 
+@api_view()
+@permission_classes([IsAuthenticated])
+# @authentication_classes([TokenAuthentication])
+def msg(request):
+    return Response({"message":"This view is protected"})
 # def sayHello(request):
 #     return HttpResponse('Hello World')
 
@@ -90,7 +98,7 @@ from django.http import HttpResponse
 #     lookup_field = 'first_name'
 
 # User CRUD APIs
-class ListCreateUserAPIView(generics.ListCreateAPIView):
+class ListCreateUserAPIView(generics.ListCreateAPIView):  #It handles POST,GET
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated] 
@@ -102,16 +110,19 @@ class RetrieveUpdateDestroyUserAPIView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthenticated] 
 
 # Menu CRUD APIs
-class MenuItemsView(generics.ListCreateAPIView):
+class MenuItemsView(generics.ListCreateAPIView): # POST,GET
+    permission_classes = [IsAuthenticated]
     queryset = Menu.objects.all()
     serializer_class = MenuSerializer
 
-class SingleMenuItemView(generics.RetrieveUpdateDestroyAPIView):
+class SingleMenuItemView(generics.RetrieveUpdateDestroyAPIView):  #GET, PUT and DELETE , NO POST, NO PATCH
+    permission_classes = [IsAuthenticated]
     queryset = Menu.objects.all()
     serializer_class = MenuSerializer
     # lookup_field = 'title'
 
 # Booking CRUD APIs
 class BookingViewSet (viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
     queryset = Booking.objects.all()
     serializer_class = BookingSerializer

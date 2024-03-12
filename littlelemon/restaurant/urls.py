@@ -1,19 +1,26 @@
 from django.contrib import admin 
 from django.urls import path, include
 from rest_framework import routers
+from rest_framework.authtoken.views import obtain_auth_token
+
 from . import views 
 
 # router = routers.DefaultRouter()
 # router.register(r'users', views.userViewSet)
 urlpatterns = [ 
+
+    path('api-token-auth',obtain_auth_token),
+
+    path('message/', views.msg),
+
     path('users/', views.ListCreateUserAPIView.as_view(), name='list-users'),
     path('users/<username>/', views.RetrieveUpdateDestroyUserAPIView.as_view(), name='destroy-users'),
 
     # path('bookings/', views.BookingsView.as_view(), name='list-bookings'),
     # path('bookings/<first_name>/', views.SingleBookingView.as_view(), name='RUD-bookings'),
 
-    path('menu/', views.MenuItemsView.as_view(), name='list-menu'),
-    path('menu/<int:pk>/', views.SingleMenuItemView.as_view(), name='RUD-menu'),
+    path('menu-items/', views.MenuItemsView.as_view(), name='list-menu'),
+    path('menu-items/<int:pk>/', views.SingleMenuItemView.as_view(), name='RUD-menu'),
 
     # path('book/', views.bookingview.as_view(), name='bookingview'),
     # path('menu/', views.bookingview.as_view(), name='menuview'),

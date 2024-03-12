@@ -38,7 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'restaurant',
-    'rest_framework'
+    'rest_framework',
+    'rest_framework.authtoken',
+    # 'djoser',
+
+
 ]
 
 MIDDLEWARE = [
@@ -87,6 +91,9 @@ DATABASES = {
 		'OPTIONS': {   
 		    'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"   
 		},
+        # SET sql_mode = 'STATIC_TRANS_TABLES', which handles invalid or missing values from being stored in the database by INSERT and UPDATE statements. 
+
+
     }
 }
 
@@ -136,3 +143,39 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
     # "/var/www/static/",
 ]
+
+REST_FRAMEWORK = {
+    # 'DEFAULT_RENDERER_CLASSES':[
+    #     'rest_framework.renderers.JSONRenderer',
+    #     'rest_framework.renderers.BrowsableAPIRenderer',
+    #     # 'rest_framework_xml.renderers.XMLRenderer',
+    #     # 'rest_framework_yaml.renderers.YAMLRenderer',
+    #     # 'rest_framework_csv.renderers.CSVRenderer',
+
+    # ],
+    # 'DEFAULT_FILTER_BACKENDS': [
+    #     'django_filters.rest_framework.DjangoFilterBackend',
+    #     'rest_framework.filters.OrderingFilter',
+    #     'rest_framework.filters.SearchFilter',
+    # ],
+    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    # 'PAGE_SIZE': 2,
+    
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        # 'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
+
+    ],
+       
+    "DATE_INPUT_FORMATS": ["%m/%d/%Y"],
+    # 'DEFAULT_PERMISSION_CLASSES': (
+    #     'rest_framework.permissions.IsAuthenticated',
+    # )
+    # 'DEFAULT_THROTTLE_RATES':{
+    #     'anon': '2/minute',
+    #     'user': '5/minute',
+    #     'ten': '10/minute'
+    # }
+}
+DJOSER={"USER_ID_FIELD":"username"}
