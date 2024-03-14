@@ -167,6 +167,11 @@ REST_FRAMEWORK = {
         # 'rest_framework.authentication.SessionAuthentication',
 
     ],
+    'DEFAULT_PERMISSION_CLASSES': ( 
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',        
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+
        
     "DATE_INPUT_FORMATS": ["%m/%d/%Y"],
     # 'DEFAULT_PERMISSION_CLASSES': (
@@ -178,4 +183,5 @@ REST_FRAMEWORK = {
     #     'ten': '10/minute'
     # }
 }
+
 DJOSER={"USER_ID_FIELD":"username"}

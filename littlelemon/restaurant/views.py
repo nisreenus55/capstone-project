@@ -115,7 +115,9 @@ class MenuItemsView(generics.ListCreateAPIView): # POST,GET
     queryset = Menu.objects.all()
     serializer_class = MenuSerializer
 
-class SingleMenuItemView(generics.RetrieveUpdateDestroyAPIView):  #GET, PUT and DELETE , NO POST, NO PATCH
+# class SingleMenuItemView(generics.RetrieveUpdateDestroyAPIView):  #GET, PUT and DELETE , NO POST, NO PATCH
+class SingleMenuItemView(generics.RetrieveUpdateAPIView, generics.DestroyAPIView):  #GET, PUT and DELETE , NO POST, NO PATCH
+
     permission_classes = [IsAuthenticated]
     queryset = Menu.objects.all()
     serializer_class = MenuSerializer
