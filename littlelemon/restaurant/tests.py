@@ -1,15 +1,11 @@
 from django.test import TestCase, RequestFactory, Client
 from rest_framework.test import APIClient
 from django.contrib.auth.models import User
-# from accounts.serializers import UserSerializer
-
 from rest_framework.authtoken.models import Token
 from datetime import datetime, date
 from .models import Booking, Menu
 from django.urls import reverse
-
 from .views import MenuItemsView
-# Create your tests here.
 
 
 class BookingModelTest(TestCase):
@@ -66,7 +62,6 @@ class MenuViewTest (TestCase):
         field_label = menu._meta.get_field('price').verbose_name
         self.assertEqual(field_label, 'price')
 
-
     def test_title_max_length(self):
         menu = Menu.objects.get(title="Pizza")
         max_length = menu._meta.get_field('title').max_length
@@ -76,7 +71,6 @@ class MenuViewTest (TestCase):
         menu = Menu.objects.get(title="Pizza")
         expected_object_name = f'{menu.title} : {menu.price}'
         self.assertEqual(str(menu), expected_object_name)
-
 
     def setUp(self):
         self.client = Client()

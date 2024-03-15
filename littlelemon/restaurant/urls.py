@@ -8,13 +8,16 @@ from . import views
 # router = routers.DefaultRouter()
 # router.register(r'users', views.userViewSet)
 urlpatterns = [ 
+    path('', views.home, name="home"),
+    path('about/', views.about, name="about"),
 
     path('api-token-auth',obtain_auth_token),
 
     path('message/', views.msg),
+    path('users/',views.SignupViewSet.as_view(), name='list-users'),
 
-    path('users/', views.ListCreateUserAPIView.as_view(), name='list-users'),
-    path('users/<username>/', views.RetrieveUpdateDestroyUserAPIView.as_view(), name='destroy-users'),
+    # path('users/', views.ListCreateUserAPIView.as_view(), name='list-users'),
+    path('users/<str:username>/', views.RetrieveUpdateDestroyUserAPIView.as_view(), name='destroy-users'),
 
     # path('bookings/', views.BookingsView.as_view(), name='list-bookings'),
     # path('bookings/<first_name>/', views.SingleBookingView.as_view(), name='RUD-bookings'),

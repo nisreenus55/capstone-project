@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Booking, Menu
-from .serializers import BookingSerializer, MenuSerializer, UserSerializer
+from .serializers import BookingSerializer, MenuSerializer, UserSerializer, SignupSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
@@ -95,7 +95,16 @@ def msg(request):
 # class SingleBookingView(generics.RetrieveUpdateDestroyAPIView):
 #     queryset = Booking.objects.all()
 #     serializer_class = BookingSerializer
-#     lookup_field = 'first_name'
+
+class SignupViewSet(generics.ListCreateAPIView):
+    queryset = User.objects.all() 
+    serializer_class = SignupSerializer
+
+def home(request):
+    return render(request, 'index.html')
+
+def about(request):
+    return render(request, 'about.html')
 
 # User CRUD APIs
 class ListCreateUserAPIView(generics.ListCreateAPIView):  #It handles POST,GET
